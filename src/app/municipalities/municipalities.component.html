@@ -1,0 +1,39 @@
+<div class="row mt-3">
+  <div class="col-12 mt-2 text-center">
+    <h2>Municipios</h2>
+  </div>
+  <div class="col-12 mt-2 text-center">
+    <a href="/lista" routerLinkActive="active" class="btn btn-outline-primary">Enlista</a>
+  </div>
+  <div class="col-12 mt-2 text-center">
+    <a href="/agregar" routerLinkActive="active" class="btn btn-outline-primary">Agregar</a>
+  </div>
+  <div class="col-12 mt-2 text-center">
+    <a href="/eliminar" routerLinkActive="active" class="btn btn-outline-primary">Eliminar</a>
+  </div>
+  <div class="col-12 mt-2 text-center">
+    <a href="/Modificar" routerLinkActive="active" class="btn btn-outline-primary">Modificar</a>
+  </div>
+  <div class="col-12 text-center">
+    <form>
+      <label for="igecem">IGECEM</label>
+      <input type="number" name="igecem" id="igecem">
+
+      <label for="name">Nombre</label>
+      <input type="text" name="name" id="name">
+
+      <input type="submit" class="btn--blue btn--add" value="Agregar">
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-10 mx-auto">
+    <div class="municipalities_container">
+      <div class="media" *ngFor="let municipality of municipalities">
+        <div class="media-body">
+          <p>{{ municipality.data.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
