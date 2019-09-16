@@ -23,13 +23,13 @@ describe('AppComponent', () => {
   it(`should have as title 'municipalities-igecem'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('municipalities-igecem');
+    expect(app.title).toEqual('menu-igecem');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('municipalities-igecem app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('menu-igecem app is running!');
   });
 });

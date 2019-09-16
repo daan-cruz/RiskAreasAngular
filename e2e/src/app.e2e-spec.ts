@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('municipalities-igecem app is running!');
+    expect(page.getTitleText()).toEqual('menu-igecem app is running!');
   });
 
   afterEach(async () => {

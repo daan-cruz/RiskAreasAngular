@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {MunicipalitiesComponent} from './municipalities/municipalities.component';
+import { MunicipalitiesComponent } from './municipalities/menu/municipalities.component';
 
 
 const routes: Routes = [
