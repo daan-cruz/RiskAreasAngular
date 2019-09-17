@@ -1,5 +1,5 @@
-export class MunicipalityModel {
-  id: string;
+export class Municipality {
+  $key: string;
   igecem: string;
   name: string;
   // significance: string;

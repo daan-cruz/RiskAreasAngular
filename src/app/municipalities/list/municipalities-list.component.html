@@ -1,9 +1,37 @@
 <div class="row">
-  <div class="col-10 mx-auto">
-    <div class="municipalities_container" *ngFor="let municipality of municipalities">
-      <div class="media-body">
-        <p>{{ municipality.name }}</p>
+    <div class="col-md-6 col-lg-4 col-12" *ngFor="let municipality of municipalities | async">
+      <div class="card border-primary mt-3">
+        <div class="card-body p-2">
+          <div class="row">
+            <div class="col-6 text-left">
+              <p class="mb-1">
+                IGECEM: <span class="font-weight-bold">{{ municipality.igecem }}</span>
+              </p>
+            </div>
+            <div class="col-6 text-right">
+              <span class="text-info" (click)="municipalityDetail(municipality.id)">Ver más</span>
+            </div>
+          </div>
+          <p class="card-text">{{ municipality.name }}</p>
+        </div>
+<!--        <div class="card-footer px-1 py-2">-->
+<!--          <div class="row mx-0">-->
+<!--            <div class="col-6 text-left">-->
+<!--              <span class="btn btn-info p-1" style="font-size: 0.7rem">Editar</span>-->
+<!--            </div>-->
+<!--            <div class="col-6 text-right">-->
+<!--              <span class="btn btn-danger p-1" style="font-size: 0.7rem">Eliminar</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
+    </div>
+  <div class="col-12 px-0 mt-4 text-center">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+    <div class="spinner-border text-danger" role="status" style="margin-left: -32px">
+      <span class="sr-only">Cargando...</span>
     </div>
   </div>
 </div>

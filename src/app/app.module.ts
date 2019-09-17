@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 
 import { MunicipalitiesComponent } from './municipalities/menu/municipalities.component';
 import { MunicipalitiesListComponent } from './municipalities/list/municipalities-list.component';
+import { MunicipalityDetailComponent } from './municipalities/detail/municipality-detail.component';
 
 const appRoutes: Routes = [
   // { path: '', component: AppComponent },
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MunicipalitiesComponent,
-    MunicipalitiesListComponent
+    MunicipalitiesListComponent,
+    MunicipalityDetailComponent
   ],
   imports: [
     BrowserModule,

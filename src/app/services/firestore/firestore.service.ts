@@ -1,39 +1,53 @@
 import { Injectable } from '@angular/core';
 
 // Firebase
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 // Models
-import { MunicipalityModel } from '../../../models/municipality.model';
+import { Municipality } from '../../../models/municipality';
+import {error} from 'util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
 
+  private basePathRisk = '/risk';
+  private basePathMunicipality = '/municipalities';
+
+  municipalities: Observable<any[]> = null;
+  municipality: Observable<any> = null;
+
   constructor(
-    private firestore: AngularFirestore,
+    private db: AngularFireDatabase
   ) { }
 
-  public createMunicipality(municipality: MunicipalityModel) {
-    return this.firestore.collection('municipalities').add(municipality);
+  getMunicipalitiesList() {
+    this.municipalities = this.db.list(this.basePathMunicipality).valueChanges();
+    return this.municipalities;
   }
 
-  public getMunicipalityIgecem(igecem: string) {
-    return this.firestore.collection('municipalities').doc(igecem).snapshotChanges();
+  getMunicipality(key: string) {
+    const municipalityPath = '${this.basePathMunicipality}/${key}';
+    this.municipality = this.db.object(municipalityPath).valueChanges();
   }
 
-  public getMunicipalitiesRisk(risk: string) {
-    return this.firestore.collection('municipalities').doc(risk).snapshotChanges();
+  createMunicipality(municipality: Municipality) {
+    this.db.object(this.basePathMunicipality).set({
+      igecem: municipality.igecem,
+      name: municipality.name
+    });
   }
 
-  public getMunicipalities() {
-    return this.firestore.collection('municipalities').snapshotChanges();
+  updateMunicipality(key: string, municipality: Municipality) {
+    this.db.object(this.basePathMunicipality + '/' + municipality.$key).update({
+      name: municipality.name
+    });
   }
 
-  public updateMunicipality(municipality: MunicipalityModel) {
-    delete municipality.id;
-    return this.firestore.doc('municipalities/' + municipality.id).update(municipality);
+  deleteMunicipality(key: string) {
+    this.db.object(this.basePathMunicipality + '/' + key).remove();
   }
 
 }

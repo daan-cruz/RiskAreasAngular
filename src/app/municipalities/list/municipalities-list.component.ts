@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Firebase
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FirestoreService } from '../../services/firestore/firestore.service';
+import { Observable } from 'rxjs';
 
 // Models
-import {MunicipalityModel} from '../../../models/municipality.model';
+import {Municipality} from '../../../models/municipality';
 
 @Component({
   selector: 'app-municipalities-list',
@@ -14,22 +15,19 @@ import {MunicipalityModel} from '../../../models/municipality.model';
 })
 export class MunicipalitiesListComponent implements OnInit {
 
-  municipalities: MunicipalityModel[];
+  public municipalities: Observable<any[]>;
 
   constructor(
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private routes: Router
   ) { }
 
   ngOnInit() {
-    this.firestoreService.getMunicipalities().subscribe(data => {
-      this.municipalities = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          igecem: e.payload.doc.data(),
-          name: e.payload.doc.data()
-        } as MunicipalityModel;
-      });
-    });
+    this.municipalities = this.firestoreService.getMunicipalitiesList();
+  }
+
+  municipalityDetail(municipality: string) {
+    this.routes.navigate(['municipios/detalles/' + municipality]);
   }
 
 }
