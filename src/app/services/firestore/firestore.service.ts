@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+
+// Firebase
+import { AngularFirestore } from '@angular/fire/firestore';
+
+// Models
+import { MunicipalityModel } from '../../../models/municipality.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(
+    private firestore: AngularFirestore,
+  ) { }
 
-  public createMunicipality(data: {
-    name: string,
-    igecem: string
-  }) {
-    return this.firestore.collection('municipalities').add(data);
+  public createMunicipality(municipality: MunicipalityModel) {
+    return this.firestore.collection('municipalities').add(municipality);
   }
 
   public getMunicipalityIgecem(igecem: string) {
@@ -21,15 +24,16 @@ export class FirestoreService {
   }
 
   public getMunicipalitiesRisk(risk: string) {
-    return this.firestore.collection('municipalitites').doc(risk).snapshotChanges();
+    return this.firestore.collection('municipalities').doc(risk).snapshotChanges();
   }
 
   public getMunicipalities() {
-    return this.firestore.collection('municipalitites').snapshotChanges();
+    return this.firestore.collection('municipalities').snapshotChanges();
   }
 
-  public updateMunicipality(igecem: string, data: any) {
-    return this.firestore.collection('municipalitites').doc(igecem).set(data);
+  public updateMunicipality(municipality: MunicipalityModel) {
+    delete municipality.id;
+    return this.firestore.doc('municipalities/' + municipality.id).update(municipality);
   }
 
 }
